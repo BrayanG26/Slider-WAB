@@ -1,0 +1,17 @@
+{
+  "name": "Slider",
+  "2D": true,
+  "3D": false,
+  "platform": "HTML",
+  "version": "2.1",
+  "wabVersion": "2.1",
+  "author": "Esri R&D Center Beijing",
+  "description": "This is the custom widget for slider",
+  "copyright": "",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "closeable": true,
+  "properties": {
+    "inPanel": false,
+    "supportMultiInstance": false
+  }
+}
