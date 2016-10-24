@@ -1,13 +1,16 @@
 define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
-        'dijit/form/HorizontalRuleLabels','esri/dijit/HorizontalSlider','dojo/parser','dijit/form/TextBox','dojo/dom'],
-        function(declare, BaseWidget,HorizSlider,HorzRuleLabels,HorizontalSlider,parser,TextBox,dom) {
+        'dijit/form/HorizontalRuleLabels','dojo/parser','dijit/form/TextBox','dojo/dom',
+		'dijit/_TemplatedMixin','dijit/_WidgetsInTemplateMixin','dojo/dom-style','dojo/text!./Template.html',
+    'dijit/form/Button','esri/dijit/HorizontalSlider'],
+        function(declare, BaseWidget,HorizSlider,HorzRuleLabels,parser,TextBox,dom,_TemplatedMixin,_WidgetsInTemplateMixin,domStyle,
+                 template,Button,HorizontalSlider) {
     //To create a widget, you need to derive from BaseWidget.
-    return declare([BaseWidget], {
+    return declare([BaseWidget,_WidgetsInTemplateMixin], {
       // Custom widget code goes here
-
+      //templateString:template,
       baseClass: 'jimu-widget-customwidget',
 	  slider:null,
-        parser:null,
+      parser:null,
       //this property is set by the framework when widget is loaded.
       name: 'Slider',
 
@@ -20,7 +23,14 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
        },
 
        startup: function() {
-           parser.parse();
+           var style = {
+               left: '100px',
+               right: '250px',
+               top: '150px',
+               bottom: '40px',
+               width: 'auto'
+           };
+		   console.log('el perro me mojo');
            this.inherited(arguments);
            this.slider = new HorizSlider({
                name: "slider",
@@ -29,15 +39,16 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
                maximum: 1,
                intermediateChanges: true,
                onChange: function (value) {
+                   dom.byId("sliderValue").value = value;
                    console.log("value of slider: "+value);
                }
-           }, this.sliderDiv);
-
+           }, "slider");
+           domStyle.set("slider", "display", "block");
+           domStyle.set("slider", style);
         console.log('startup');
        },
 
        onOpen: function(){
-           console.log('el perro me mojo');
          console.log('onOpen');
        },
 
