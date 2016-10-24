@@ -1,12 +1,13 @@
-define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider','dijit/form/HorizontalRuleLabels','esri/dijit/HorizontalSlider'],
-  function(declare, BaseWidget,HorizSlider,HorzRuleLabels,HorizontalSlider) {
+define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
+        'dijit/form/HorizontalRuleLabels','esri/dijit/HorizontalSlider','dojo/parser','dijit/form/TextBox','dojo/dom'],
+        function(declare, BaseWidget,HorizSlider,HorzRuleLabels,HorizontalSlider,parser,TextBox,dom) {
     //To create a widget, you need to derive from BaseWidget.
     return declare([BaseWidget], {
       // Custom widget code goes here
 
       baseClass: 'jimu-widget-customwidget',
 	  slider:null,
-
+        parser:null,
       //this property is set by the framework when widget is loaded.
       name: 'Slider',
 
@@ -19,12 +20,24 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider','d
        },
 
        startup: function() {
-        this.inherited(arguments);
-        this.slider = new HorizontalSlider({labels: ["1", "5", "10"]}, "sliderOpacity");
+           parser.parse();
+           this.inherited(arguments);
+           this.slider = new HorizSlider({
+               name: "slider",
+               value: 5,
+               minimum: 0,
+               maximum: 1,
+               intermediateChanges: true,
+               onChange: function (value) {
+                   console.log("value of slider: "+value);
+               }
+           }, this.sliderDiv);
+
         console.log('startup');
        },
 
        onOpen: function(){
+           console.log('el perro me mojo');
          console.log('onOpen');
        },
 
