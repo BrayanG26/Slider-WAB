@@ -33,7 +33,6 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
 		   console.log('el perro me mojo');
            this.inherited(arguments);
            this.slider = new HorizSlider({
-               name: "slider",
                value: 5,
                minimum: 0,
                maximum: 1,
@@ -42,10 +41,13 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
                    dom.byId("sliderValue").value = value;
                    console.log("value of slider: "+value);
                }
-           }, "slider");
-           domStyle.set("slider", "display", "block");
-           domStyle.set("slider", style);
-        console.log('startup');
+           }, this.transparencyBody);
+           new HorzRuleLabels({
+               container: "bottomDecoration"
+           }, this.transparencyRule);
+           domStyle.set(this.transparencyDiv, "display", "block");
+           domStyle.set(this.transparencyDiv, style);
+           console.log('startup');
        },
 
        onOpen: function(){
