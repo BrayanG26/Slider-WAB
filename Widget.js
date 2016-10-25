@@ -7,7 +7,7 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
     //To create a widget, you need to derive from BaseWidget.
     return declare([BaseWidget,_WidgetsInTemplateMixin], {
       // Custom widget code goes here
-      //templateString:template,
+      templateString:template,
       baseClass: 'jimu-widget-customwidget',
 	  slider:null,
       parser:null,
@@ -32,7 +32,7 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
            };
 		   console.log('el perro me mojo');
            this.inherited(arguments);
-           this.slider = new HorizSlider({
+           /*this.slider = new HorizSlider({
                value: 5,
                minimum: 0,
                maximum: 1,
@@ -46,7 +46,7 @@ define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
                container: "bottomDecoration"
            }, this.transparencyRule);
            domStyle.set(this.transparencyDiv, "display", "block");
-           domStyle.set(this.transparencyDiv, style);
+           domStyle.set(this.transparencyDiv, style);*/
            console.log('startup');
        },
 
