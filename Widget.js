@@ -1,89 +1,58 @@
-define(['dojo/_base/declare', 'jimu/BaseWidget','dijit/form/HorizontalSlider',
-        'dijit/form/HorizontalRuleLabels','dojo/parser','dijit/form/TextBox','dojo/dom',
-		'dijit/_TemplatedMixin','dijit/_WidgetsInTemplateMixin','dojo/dom-style','dojo/text!./Template.html',
-    'dijit/form/Button','esri/dijit/HorizontalSlider'],
-        function(declare, BaseWidget,HorizSlider,HorzRuleLabels,parser,TextBox,dom,_TemplatedMixin,_WidgetsInTemplateMixin,domStyle,
-                 template,Button,HorizontalSlider) {
-    //To create a widget, you need to derive from BaseWidget.
-    return declare([BaseWidget,_WidgetsInTemplateMixin], {
-      // Custom widget code goes here
-      templateString:template,
-      baseClass: 'jimu-widget-customwidget',
-	  slider:null,
-      parser:null,
-      //this property is set by the framework when widget is loaded.
-      name: 'Slider',
+define([
+		'dojo/_base/declare',
+		'jimu/BaseWidget',
+		'dijit/_WidgetsInTemplateMixin',
+		'esri/dijit/HorizontalSlider',
+		'dojo/dom',
+		'dojo/dom-style'
+	],
+	function (
+		declare,
+		BaseWidget,
+		_WidgetsInTemplateMixin,
+		HorizontalSlider,
+		dom,
+		domStyle) {
+	//To create a widget, you need to derive from BaseWidget.
+	return declare([BaseWidget, _WidgetsInTemplateMixin], {
+		// Custom widget code goes here
+		baseClass : 'jimu-widget-customwidget',
+		horizontalSlider : null,
+		//this property is set by the framework when widget is loaded.
+		name : 'Slider',
 
+		//methods to communication with app container:
 
-      //methods to communication with app container:
+		postCreate : function () {
+			this.inherited(arguments);
+			console.log('postCreate');
+		},
 
-       postCreate: function() {
-         this.inherited(arguments);
-         console.log('postCreate');
-       },
+		startup : function () {
+			this.inherited(arguments);
+			this.horizontalSlider = new HorizontalSlider({
+					labels : ["1", "5", "10"]
+				}, this.sliderNode);
+			this.horizontalSlider.showButtons = true;
+			this.horizontalSlider.startup();
+			console.log('startup');
+		},
 
-       startup: function() {
-           var style = {
-               left: '100px',
-               right: '250px',
-               top: '150px',
-               bottom: '40px',
-               width: 'auto'
-           };
-		   console.log('el perro me mojo');
-           this.inherited(arguments);
-           /*this.slider = new HorizSlider({
-               value: 5,
-               minimum: 0,
-               maximum: 1,
-               intermediateChanges: true,
-               onChange: function (value) {
-                   dom.byId("sliderValue").value = value;
-                   console.log("value of slider: "+value);
-               }
-           }, this.transparencyBody);
-           new HorzRuleLabels({
-               container: "bottomDecoration"
-           }, this.transparencyRule);
-           domStyle.set(this.transparencyDiv, "display", "block");
-           domStyle.set(this.transparencyDiv, style);*/
-           console.log('startup');
-       },
+		onOpen : function () {
+			console.log('onOpen');
+			var style = {
+				left : '100px',
+				right : '250px',
+				top : '150px',
+				bottom : '40px',
+				width : '100px'
+			};
+			domStyle.set(this.sliderNode, style);
+		},
 
-       onOpen: function(){
-         console.log('onOpen');
-       },
+		onClose : function () {
+			console.log('onClose');
+		}
 
-       onClose: function(){
-         console.log('onClose');
-       },
-
-      // onMinimize: function(){
-      //   console.log('onMinimize');
-      // },
-
-      // onMaximize: function(){
-      //   console.log('onMaximize');
-      // },
-
-      // onSignIn: function(credential){
-      //   /* jshint unused:false*/
-      //   console.log('onSignIn');
-      // },
-
-      // onSignOut: function(){
-      //   console.log('onSignOut');
-      // }
-
-      // onPositionChange: function(){
-      //   console.log('onPositionChange');
-      // },
-
-      // resize: function(){
-      //   console.log('resize');
-      // }
-
-      //methods to communication between widgets:
-
-    });
-  });
+	});
+});

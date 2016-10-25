@@ -9,9 +9,9 @@
   "description": "This is the custom widget for slider",
   "copyright": "",
   "license": "http://www.apache.org/licenses/LICENSE-2.0",
-  "closeable": true,
   "properties": {
     "inPanel": false,
-    "supportMultiInstance": false
+    "supportMultiInstance": false,
+	"closeable": true
   }
 }
