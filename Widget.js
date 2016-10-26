@@ -4,7 +4,9 @@ define([
 		'dijit/_WidgetsInTemplateMixin',
 		'esri/dijit/HorizontalSlider',
 		'dojo/dom',
-		'dojo/dom-style'
+		'dojo/dom-style',
+		'dijit/form/TextBox',
+		'dijit/form/HorizontalRuleLabels'
 	],
 	function (
 		declare,
@@ -12,7 +14,9 @@ define([
 		_WidgetsInTemplateMixin,
 		HorizontalSlider,
 		dom,
-		domStyle) {
+		domStyle,
+		TextBox,
+		HorzRuleLabels) {
 	//To create a widget, you need to derive from BaseWidget.
 	return declare([BaseWidget, _WidgetsInTemplateMixin], {
 		// Custom widget code goes here
@@ -31,10 +35,19 @@ define([
 		startup : function () {
 			this.inherited(arguments);
 			this.horizontalSlider = new HorizontalSlider({
-					labels : ["1", "5", "10"]
+					minimum: 0,
+					maximum: 1,
+					intermediateChanges: true,
+					onChange: function(value){
+						dom.byId("sliderValue").value = value;
+						console.log('slider value: '+value);
+					}
 				}, this.sliderNode);
 			this.horizontalSlider.showButtons = true;
 			this.horizontalSlider.startup();
+			new HorzRuleLabels({
+				container: "bottomDecoration"
+			}, this.transparencyRule);
 			console.log('startup');
 		},
 
@@ -45,7 +58,7 @@ define([
 				right : '250px',
 				top : '150px',
 				bottom : '40px',
-				width : '100px'
+				width : '80px'
 			};
 			domStyle.set(this.sliderNode, style);
 		},
