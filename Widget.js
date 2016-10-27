@@ -7,7 +7,8 @@ define([
 		'dojo/dom-style',
 		'dijit/form/TextBox',
 		'dijit/form/HorizontalRuleLabels',
-		'dijit/form/HorizontalSlider'
+		'dijit/form/HorizontalSlider',
+		'dojo/_base/lang'
 	],
 	function (
 		declare,
@@ -18,7 +19,8 @@ define([
 		domStyle,
 		TextBox,
 		HorzRuleLabels,
-		HorizSlider) {
+		HorizSlider,
+		lang) {
 	//To create a widget, you need to derive from BaseWidget.
 	return declare([BaseWidget, _WidgetsInTemplateMixin], {
 		// Custom widget code goes here
@@ -44,11 +46,11 @@ define([
 					minimum : 0,
 					maximum : 1,
 					intermediateChanges : true,
-					onChange : function (value) {
+					onChange : lang.hitch(this, function (value) {
 						console.log('slider value: ' + value);
 						this._onTransparencyChanged(value);
 						console.log('opacity changed');
-					}
+					})
 				}, this.sliderNode);
 			this.horizontalSlider.startup();
 			new HorzRuleLabels({
