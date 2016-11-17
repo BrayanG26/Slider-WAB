@@ -2,7 +2,6 @@ define([
 		'dojo/_base/declare',
 		'jimu/BaseWidget',
 		'dijit/_WidgetsInTemplateMixin',
-		'esri/dijit/HorizontalSlider',
 		'dojo/dom',
 		'dojo/dom-style',
 		'dijit/form/TextBox',
@@ -14,7 +13,6 @@ define([
 		declare,
 		BaseWidget,
 		_WidgetsInTemplateMixin,
-		HorizontalSlider,
 		dom,
 		domStyle,
 		TextBox,
@@ -46,6 +44,7 @@ define([
 					minimum : 0,
 					maximum : 1,
 					intermediateChanges : true,
+					style:"height: 20px;",
 					onChange : lang.hitch(this, function (value) {
 						console.log('slider value: ' + value);
 						this._onTransparencyChanged(value);
@@ -53,9 +52,9 @@ define([
 					})
 				}, this.sliderNode);
 			this.horizontalSlider.startup();
-			new HorzRuleLabels({
+			/*new HorzRuleLabels({
 				container : "bottomDecoration"
-			}, this.transparencyRule);
+			}, this.transparencyRule);*/
 			console.log('startup');
 		},
 
