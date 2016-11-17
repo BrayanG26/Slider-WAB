@@ -74,8 +74,8 @@ define([
 			console.log('onClose');
 		},
 		_onTransparencyChanged : function (opacity) {
-			this._vectorial.setOpacity(1 - opacity);
-			this._baseAerea.setOpacity(opacity);
+			this._baseAerea.setOpacity(1 - opacity);
+			this._vectorial.setOpacity(opacity);
 		}
 
 	});
