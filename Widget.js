@@ -27,15 +27,18 @@ define([
 		//this property is set by the framework when widget is loaded.
 		name : 'Slider',
 		_vectorial : null,
-		_baseAerea : null,
+		_charlotte : null,
 
 		//methods to communication with app container:
 
 		postCreate : function () {
 			this.inherited(arguments);
-			this._vectorial = this.map.getLayer(this.map.layerIds[1]);
-			this._baseAerea = this.map.getLayer(this.map.layerIds[2]);
-			console.log('postCreate');
+			console.warn('postCreate');
+			// this._vectorial = this.map.getLayer(this.map.layerIds[1]);
+			this._charlotte = this.map.getLayer('CharlotteLAS_5636');
+			console.log(this.map.getLayer('CharlotteLAS_5636'));
+			// console.log(this._charlotte);
+			
 		},
 
 		startup : function () {
@@ -73,8 +76,8 @@ define([
 			console.log('onClose');
 		},
 		_onTransparencyChanged : function (opacity) {
-			this._baseAerea.setOpacity(1 - opacity);
-			this._vectorial.setOpacity(opacity);
+			this._charlotte.setOpacity(1 - opacity);
+			// this._vectorial.setOpacity(opacity);
 		}
 
 	});
